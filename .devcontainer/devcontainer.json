@@ -1,0 +1,32 @@
+{
+    "name": "default",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "ghcr.io/stu-bell/devcontainer-features/claude-code:0": {},
+      "ghcr.io/devcontainers/features/node:2": {},
+      "ghcr.io/devcontainers/features/python:1": {},
+      "ghcr.io/devcontainers/features/docker-in-docker:4": {},
+    },
+    "overrideFeatureInstallOrder": [
+        "ghcr.io/stu-bell/devcontainer-features/claude-code",
+        "ghcr.io/devcontainers/features/docker-in-docker",
+        "ghcr.io/devcontainers/features/node",
+        "ghcr.io/devcontainers/features/python",
+    ],
+    "hostRequirements": {
+      "cpus": 5,
+      "memory": "32gb",
+      "storage": "16gb"
+    },
+    "remoteEnv": {
+      "PODMAN_USERNS": "keep-id",
+    },
+    "containerUser": "vscode",
+    "runArgs": [
+      "--init" // Recommended for proper process management
+    ],
+    "capAdd": [
+      "IPC_LOCK"
+    ],
+    "postCreateCommand": ".devcontainer/post-create.sh",
+  }

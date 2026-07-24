@@ -1,0 +1,25 @@
+
+processors:
+  cumulativetodelta: {}
+
+exporters:
+  # DT_ENDPOINT format: https://<env-id>.live.dynatrace.com/api/v2/otlp
+  otlphttp/dynatrace:
+    endpoint: ${env:DT_ENDPOINT}/api/v2/otlp
+    headers:
+      Authorization: "Api-Token ${env:DT_API_TOKEN}"
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, otlphttp/jaeger, otlphttp/dynatrace]
+    metrics:
+      receivers: [otlp]
+      processors: [batch, cumulativetodelta]
+      exporters: [debug, otlphttp/dynatrace]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, otlphttp/dynatrace]

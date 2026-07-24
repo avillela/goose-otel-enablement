@@ -1,0 +1,26 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.128.0
+    command:
+      - "--config=/etc/otel/config.yaml"
+      - "--config=/etc/otel/config-dt.yaml"
+    volumes:
+      - ./src/otel/otel-collector-config.yaml:/etc/otel/config.yaml
+      - ./src/otel/otel-collector-config-dt.yaml:/etc/otel/config-dt.yaml
+    ports:
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+    environment:
+      - DT_ENDPOINT=${DT_ENDPOINT}
+      - DT_API_TOKEN=${DT_API_TOKEN}
+    depends_on:
+      - jaeger
+
+  jaeger:
+    image: jaegertracing/jaeger:2.7.0
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "4317"         # OTLP gRPC (internal only)
+      - "4318"         # OTLP HTTP (internal only)
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true

@@ -1,0 +1,12 @@
+# Project Level Directives for Goose
+
+This file contains general directives for this project.
+
+## ALWAYS DO THIS
+
+Always ask before making changes to the environment and/or to files.
+
+## Working directory for code
+
+* Follow the directory structure in `src/goose/hints/directory-structure.md` for source code creation/placement.
+* Always prompt before saving files to a directory, unless given the express permission beforehand
