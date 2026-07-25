@@ -1,19 +1,17 @@
 # Goose Initial Setup & Configuration
 
-These instructions are for setting up Goose with Claude Code. The Goose configuration file can be found at: `~/.config/goose/config.yaml`.
+These instructions are for setting up Goose with with the [Claude ACP](https://goose-docs.ai/docs/guides/acp-providers#claude-acp) provider.
 
-1- Login to Claude Code
+The Goose configuration file can be found at: `~/.config/goose/config.yaml`.
 
-Open up a Claude Code session by typing `claude`, and following the login instructions.
-
-2- Install Goose
+## 1. Install Goose
 
 ```bash
 GOOSE_RELEASE="v1.43.0"
 curl -fsSL https://github.com/aaif-goose/goose/releases/download/${GOOSE_RELEASE}/download_cli.sh | bash
 ```
 
-3- Configure your provider
+## 2. Configure your provider
 
 > **NOTE:** If you need to configure your provider again, run `goose configure`
 
@@ -42,53 +40,43 @@ curl -fsSL https://github.com/aaif-goose/goose/releases/download/${GOOSE_RELEASE
 
 Success!!
 
-Unfortunately, Claude CLI is deprecated, but we don't have the option to select `Claude ACP`, but I did find a workaround by asking Goose to switch to that configuration. I'll save you the trouble of having to do that, and all you need to do instead is open up your [`Goose config.yaml`](~/.config/goose/config.yaml) file, and locate the code snipped below:
+Unfortunately, as you were making your selection, you may have noticed that the Claude CLI is deprecated. On top of that, we don't have the option to select `Claude ACP`. ARRGH!! Fortunately, I found a workaround.
+
+First, open your [`Goose config.yaml`](~/.config/goose/config.yaml) file, and locate the code snipped below:
 
 ```yaml
-CLAUDE_CODE_COMMAND: claude
 active_provider: claude-code
 providers:
   claude-code:
     enabled: true
     model: sonnet
     configured: true
-GOOSE_THINKING_EFFORT: low
 ```
 
-Replace with:
+Replace `claude-code` with `claude-acp`. Your modified block should look like this:
 
 ```yaml
-CLAUDE_CODE_COMMAND: claude
 active_provider: claude-acp
 providers:
   claude-acp:
     enabled: true
     model: sonnet
     configured: true
-GOOSE_THINKING_EFFORT: low
 ```
 
-Note that all we did was replace `claude-code` with `claude-acp`.
-
-Globally install the Claude ACP package:
+You also need to globally install the Claude ACP npm package:
 
 ```bash
 npm install -g @agentclientprotocol/claude-agent-acp
 ```
 
-For more info, check out out the Goose ACP docs [here](https://goose-docs.ai/docs/guides/acp-providers/#claude-acp-configuration).
+For more info, check out out the [Goose ACP docs](https://goose-docs.ai/docs/guides/acp-providers/#claude-acp-configuration).
 
-> **NOTE:** Feel free to change the `GOOSE_THINKING_EFFORT` and `model` to something that suits you better (e.g. `GOOSE_THINKING_EFFORT: medium` and `model: haiku`).
+### 3. Login to Claude
 
-4- Login to Claude
+Open a new terminal window, then start a Claude Code session by typing `claude`, and following the login instructions.
 
-Claude authentication is required before you can use Claude ACP with Goose. Open a new terminal window and login to Claude, and follow the login instructions.
-
-```bash
-claude
-```
-
-5- Start goose
+### 4. Start goose
 
 Once Claude is authenticated, open a new terminal window and start Goose:
 

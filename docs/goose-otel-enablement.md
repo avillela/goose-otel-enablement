@@ -2,7 +2,7 @@
 
 ## Overview
 
-Goose v1.43.0 ships with built-in OpenTelemetry instrumentation (using the Rust OTel SDK v0.32) covering traces, metrics, and logs. You can enableme this functionality on initial setup of Goose, or at a later point in time, in the [Goose configuration YAML](~/.config/goose/config.yaml). 
+Goose v1.43.0 ships with built-in OpenTelemetry instrumentation (using the Rust OTel SDK v0.32) covering traces, metrics, and logs. You can enable this functionality on initial setup of Goose, or at a later point in time, in the [Goose configuration YAML](~/.config/goose/config.yaml). 
 
 This document summarizes all the changes made to enable and pipeline that telemetry.
 
